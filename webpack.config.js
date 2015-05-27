@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/app/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.NoErrorsPlugin()
