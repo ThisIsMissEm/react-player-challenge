@@ -10,32 +10,32 @@ import PlayerStore from '../stores/PlayerStore'
 const CLIENT_ID = '442e7a3a734d52404c7ba95c5b434ac2';
 
 class CustomPlayer extends React.Component {
-    play() {
-        let { soundCloudAudio, playing } = this.props;
-        if (playing) {
-            soundCloudAudio.pause();
-        } else {
-            soundCloudAudio.play();
-        }
+  play() {
+    let { soundCloudAudio, playing } = this.props;
+    if (playing) {
+      soundCloudAudio.pause();
+    } else {
+      soundCloudAudio.play();
+    }
+  }
+
+  render() {
+    let { track, playing } = this.props;
+
+    if (!track) {
+      return <div>Loading...</div>;
     }
 
-    render() {
-        let { track, playing } = this.props;
-
-        if (!track) {
-            return <div>Loading...</div>;
-        }
-
-        return (
-            <div>
-                <h3>{track.title} uploaded by {track.user.username}</h3>
-                <button onClick={this.play.bind(this)}>{playing ? 'Pause' : 'Play'}</button>
-                &nbsp;
-                <button onClick={PlayerActions.stopSoundcloud}>Stop</button>
-                <p>Audio from <a href="https://soundcloud.com/tellison" target="_blank">Tellison's Soundcloud</a></p>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <h3>{track.title} uploaded by {track.user.username}</h3>
+        <button onClick={this.play.bind(this)}>{playing ? 'Pause' : 'Play'}</button>
+        &nbsp;
+        <button onClick={PlayerActions.stopSoundcloud}>Stop</button>
+        <p>Audio from <a href="https://soundcloud.com/tellison" target="_blank">Tellison’s Soundcloud</a></p>
+      </div>
+    );
+  }
 }
 
 export default class SoundcloudPlayer extends React.Component {
@@ -101,10 +101,15 @@ export default class SoundcloudPlayer extends React.Component {
 
     return (
       <div>
-        SoundcloudPlayer; url={this.state.url}, status={status}
+        <p style={{ color: "#ccc"}}>url={this.state.url}, status={status}</p>
 
-        <SoundPlayerContainer ref="player" onStartTrack={PlayerActions.play} onStopTrack={PlayerActions.pause} clientId={CLIENT_ID}>
-                <CustomPlayer />
+        <SoundPlayerContainer
+          ref="player"
+          onStartTrack={PlayerActions.play}
+          onStopTrack={PlayerActions.pause}
+          clientId={CLIENT_ID}
+        >
+          <CustomPlayer />
         </SoundPlayerContainer>
       </div>
     );
