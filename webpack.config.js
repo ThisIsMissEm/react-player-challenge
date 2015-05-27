@@ -4,8 +4,6 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
     './app/index'
   ],
   output: {
@@ -14,7 +12,6 @@ module.exports = {
     publicPath: '/app/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
@@ -23,7 +20,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['react-hot', 'babel?stage=0'],
+      loaders: ['babel'],
       include: path.join(__dirname, 'app')
     }]
   }
