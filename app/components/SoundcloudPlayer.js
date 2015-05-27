@@ -28,12 +28,11 @@ class CustomPlayer extends React.Component {
 
         return (
             <div>
-                <h2>{track.title}</h2>
-                <h3>{track.user.username}</h3>
-                <button onClick={this.play.bind(this)}>
-                    {playing ? 'Pause' : 'Play'}
-                </button>
-                Audio from Soundcloud
+                <h3>{track.title} uploaded by {track.user.username}</h3>
+                <button onClick={this.play.bind(this)}>{playing ? 'Pause' : 'Play'}</button>
+                &nbsp;
+                <button onClick={PlayerActions.stopSoundcloud}>Stop</button>
+                <p>Audio from <a href="https://soundcloud.com/tellison">Tellison's Soundcloud</a></p>
             </div>
         );
     }

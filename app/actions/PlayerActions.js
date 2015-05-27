@@ -1,5 +1,5 @@
 import Dispatcher from '../Dispatcher';
-import {PLAY_STREAM, PLAY_SOUNDCLOUD, PAUSE, PLAY} from '../constants';
+import {PLAY_STREAM, PLAY_SOUNDCLOUD, STOP_SOUNDCLOUD, PAUSE, PLAY} from '../constants';
 
 Dispatcher.register(console.log.bind(console))
 
@@ -15,6 +15,12 @@ export default {
       actionType: PLAY_SOUNDCLOUD,
       url: url
     });
+  },
+
+  stopSoundcloud() {
+    Dispatcher.dispatch({
+      actionType: STOP_SOUNDCLOUD
+    })
   },
 
   pause() {

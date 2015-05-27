@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import {PLAY_STREAM, PLAY_SOUNDCLOUD, PLAY, PAUSE, LOAD_SOUNDCLOUD_URL} from '../constants';
+import {PLAY_STREAM, PLAY_SOUNDCLOUD, PLAY, PAUSE, STOP_SOUNDCLOUD} from '../constants';
 
 class PlayerStore extends BaseStore {
   constructor() {
@@ -7,6 +7,7 @@ class PlayerStore extends BaseStore {
 
     this._fromStream = false;
     this._fromSoundcloud = false;
+    this._soundcloudUrl = null;
 
     this._playing = false;
   }
@@ -33,14 +34,19 @@ class PlayerStore extends BaseStore {
     if (type === PLAY_SOUNDCLOUD) {
       this._fromStream = false;
       this._fromSoundcloud = true;
-
-      changed = true;
-    }
-
-    if(type === PLAY_SOUNDCLOUD || type === LOAD_SOUNDCLOUD_URL) {
       this._soundcloudUrl = action.url;
+
       changed = true;
     }
+
+    if (type === STOP_SOUNDCLOUD) {
+      this._playing = false;
+      this._fromSoundcloud = false;
+      this._soundcloudUrl = null;
+
+      changed = true;
+    }
+
 
     if(changed) {
       this.emitChange();
