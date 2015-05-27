@@ -48,11 +48,13 @@ export default class StreamPlayer extends React.Component {
   render() {
     return (
       <div>
-        <p>StreamPlayer for Berlin Community Radio</p>
+        <p>
+          <button onClick={this.handlePlaybackToggle.bind(this)}>
+            { this.state.isPlaying ? 'Stop' : 'Play' }
+          </button>
+          &nbsp;StreamPlayer for Berlin Community Radio
+        </p>
         <AudioStream ref="player" src="http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a" playing={this.state.isPlaying}/>
-        <button onClick={this.handlePlaybackToggle.bind(this)}>
-          { this.state.isPlaying ? 'Stop' : 'Play' }
-        </button>
       </div>
     );
   }

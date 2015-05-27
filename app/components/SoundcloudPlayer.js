@@ -32,7 +32,7 @@ class CustomPlayer extends React.Component {
                 <button onClick={this.play.bind(this)}>{playing ? 'Pause' : 'Play'}</button>
                 &nbsp;
                 <button onClick={PlayerActions.stopSoundcloud}>Stop</button>
-                <p>Audio from <a href="https://soundcloud.com/tellison">Tellison's Soundcloud</a></p>
+                <p>Audio from <a href="https://soundcloud.com/tellison" target="_blank">Tellison's Soundcloud</a></p>
             </div>
         );
     }
