@@ -3,12 +3,12 @@ import shallowEqual from 'react/lib/shallowEqual'
 
 import PlayerActions from '../actions/PlayerActions'
 import PlayerStore from '../stores/PlayerStore'
+import AudioStream from './AudioStream'
 
 export default class StreamPlayer extends React.Component {
   constructor() {
     super();
     this.state = this._getStateFromStores();
-    this.audio = document.createElement('audio');
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -19,7 +19,6 @@ export default class StreamPlayer extends React.Component {
   _getStateFromStores(){
     return {
       isPlaying: PlayerStore.fromStream && PlayerStore.isPlaying,
-      isPaused: PlayerStore.fromStream && !PlayerStore.isPlaying
     }
   }
 
@@ -36,27 +35,24 @@ export default class StreamPlayer extends React.Component {
     PlayerStore.removeChangeListener(this.changeListener);
   }
 
-  handleClick() {
+  handlePlaybackToggle() {
     if(this.state.isPlaying) {
+      this.refs.player.stop();
       PlayerActions.pause();
     } else {
+      this.refs.player.play();
       PlayerActions.playStream();
     }
   }
 
   render() {
-    if(this.state.isPlaying){
-      this.audio.src = 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a';
-      this.audio.play();
-    } else {
-      this.audio.pause();
-      this.audio.src = '';
-    }
-
     return (
       <div>
         <p>StreamPlayer for Berlin Community Radio</p>
-        <button onClick={this.handleClick.bind(this)}>{ this.state.isPlaying ? 'Pause' : 'Play' }</button>
+        <AudioStream ref="player" src="http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a" playing={this.state.isPlaying}/>
+        <button onClick={this.handlePlaybackToggle.bind(this)}>
+          { this.state.isPlaying ? 'Stop' : 'Play' }
+        </button>
       </div>
     );
   }
