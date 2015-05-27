@@ -103,7 +103,7 @@ export default class SoundcloudPlayer extends React.Component {
       <div>
         SoundcloudPlayer; url={this.state.url}, status={status}
 
-        <SoundPlayerContainer ref="player" onStartTrack={PlayerActions.play.bind(PlayerActions)} onStopTrack={PlayerActions.pause.bind(PlayerActions)} clientId={CLIENT_ID}>
+        <SoundPlayerContainer ref="player" onStartTrack={PlayerActions.play} onStopTrack={PlayerActions.pause} clientId={CLIENT_ID}>
                 <CustomPlayer />
         </SoundPlayerContainer>
       </div>
