@@ -7,6 +7,9 @@ import SoundCloudPlayer from './components/SoundCloudPlayer';
 
 window.__PlayerStore__ = PlayerStore;
 
+import PlayerActions from './actions/PlayerActions'
+window.__PlayerActions__ = PlayerActions;
+
 export default class App extends React.Component {
   constructor() {
     super();
