@@ -37,10 +37,8 @@ export default class StreamPlayer extends React.Component {
 
   handlePlaybackToggle() {
     if(this.state.isPlaying) {
-      this.refs.player.stop();
       PlayerActions.pause();
     } else {
-      this.refs.player.play();
       PlayerActions.playStream();
     }
   }
